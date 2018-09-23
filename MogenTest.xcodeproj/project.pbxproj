@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		784E4690214EECA600A6FE9D /* VenueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784E468F214EECA600A6FE9D /* VenueTableViewController.swift */; };
+		788F5FC02157EB9600904829 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788F5FBF2157EB9600904829 /* EventTableViewController.swift */; };
 		78988CED214EC93100A2EFE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78988CEC214EC93100A2EFE5 /* AppDelegate.swift */; };
 		78988CF2214EC93100A2EFE5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 78988CF0214EC93100A2EFE5 /* Main.storyboard */; };
 		78988CF5214EC93100A2EFE5 /* MogenTest.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 78988CF3214EC93100A2EFE5 /* MogenTest.xcdatamodeld */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		784E468F214EECA600A6FE9D /* VenueTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VenueTableViewController.swift; sourceTree = "<group>"; };
+		788F5FBF2157EB9600904829 /* EventTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 		78988CE9214EC93100A2EFE5 /* MogenTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MogenTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78988CEC214EC93100A2EFE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78988CF1214EC93100A2EFE5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				78988CFB214EC93200A2EFE5 /* Info.plist */,
 				78988CF3214EC93100A2EFE5 /* MogenTest.xcdatamodeld */,
 				784E468F214EECA600A6FE9D /* VenueTableViewController.swift */,
+				788F5FBF2157EB9600904829 /* EventTableViewController.swift */,
 			);
 			path = MogenTest;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			files = (
 				784E4690214EECA600A6FE9D /* VenueTableViewController.swift in Sources */,
 				78988CF5214EC93100A2EFE5 /* MogenTest.xcdatamodeld in Sources */,
+				788F5FC02157EB9600904829 /* EventTableViewController.swift in Sources */,
 				78988CED214EC93100A2EFE5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
