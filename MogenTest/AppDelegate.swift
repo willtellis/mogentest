@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         setupPersistentContainer()
+        clearStore()
+        populateStore()
+        saveContext()
         return true
     }
 
@@ -56,8 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "MogenTest")
-        container.loadPersistentStores(completionHandler: { [weak self] (storeDescription, error) in
+        persistentContainer = NSPersistentContainer(name: "MogenTest")
+        persistentContainer?.loadPersistentStores(completionHandler: { [weak self] (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -72,16 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                  */
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.clearStore()
-            strongSelf.populateStore()
-            strongSelf.saveContext()
-
         })
-        persistentContainer = container
     }
 
     // MARK: - Core Data Saving support
@@ -110,8 +104,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let context = persistentContainer.viewContext
-        let venuesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Venue")
 
+        let venuesFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Venue")
         let fetchedVenues: [Venue]
         do {
             fetchedVenues = try context.fetch(venuesFetch) as! [Venue]
@@ -119,6 +113,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             fatalError("Failed to fetch venues: \(error)")
         }
         fetchedVenues.forEach({ context.delete($0) })
+
+        let eventsFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Event")
+        let fetchedEvents: [Event]
+        do {
+            fetchedEvents = try context.fetch(eventsFetch) as! [Event]
+        } catch {
+            fatalError("Failed to fetch events: \(error)")
+        }
+        fetchedEvents.forEach({ context.delete($0) })
     }
 
     func populateStore() {
@@ -127,10 +130,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         let context = persistentContainer.viewContext
-        (1...3).forEach {
+        ["Sprint Pavillion", "JPJ Arena", "The Jefferson"].forEach { venueName in
             let venue = NSEntityDescription.insertNewObject(forEntityName: "Venue", into: context) as! Venue
-            venue.name = "Venue \($0)"
+            venue.name = venueName
+            ["Father John Misty", "Moon Taxi", "Jacquees"].forEach {
+                let event = NSEntityDescription.insertNewObject(forEntityName: "Event", into: context) as! Event
+                event.name = "\($0) at \(venueName)"
+                event.timestamp = Date()
+                venue.addToEvents(event)
+                (1...25).forEach {
+                    let ticket = NSEntityDescription.insertNewObject(forEntityName: "Ticket", into: context) as! Ticket
+                    ticket.seat = "\($0)"
+                    event.addToTickets(ticket)
+                }
+            }
         }
+
     }
 
 }
